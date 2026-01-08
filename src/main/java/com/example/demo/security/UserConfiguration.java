@@ -1,8 +1,11 @@
 package com.example.demo.security;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -37,9 +40,11 @@ public class UserConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
+        .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+        .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/home").permitAll()
-                .requestMatchers("/login").permitAll()
+        		.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .requestMatchers("/home","/login","/signin").permitAll()
                 .requestMatchers("/demodata").authenticated()
                 .anyRequest().permitAll()
             )
@@ -47,8 +52,7 @@ public class UserConfiguration {
 //                .permitAll()
 //                .defaultSuccessUrl("/demodata", true)
 //            );
-        .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-        .csrf(csrf -> csrf.disable())
+        
         .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
@@ -82,7 +86,7 @@ public class UserConfiguration {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("http://localhost:3000"); // your React app
+        configuration.setAllowedOrigins(List.of("http://localhost:3000","https://e-commerce-fromtend-h7jy.vercel.app")); // your React app
         configuration.addAllowedMethod("*"); // GET, POST, PUT, DELETE, etc.
         configuration.addAllowedHeader("*"); // Allow all headers
         configuration.setAllowCredentials(true);

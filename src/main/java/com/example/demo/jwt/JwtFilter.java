@@ -37,6 +37,11 @@ public class JwtFilter extends OncePerRequestFilter {
 //	filterChain.doFilter(request, response);
 //	return;
 		
+		 if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+	            response.setStatus(HttpServletResponse.SC_OK);
+	            return;
+	        }
+		 
 		String token = getJwtFromCookies(request);
 
         if (token == null) {
