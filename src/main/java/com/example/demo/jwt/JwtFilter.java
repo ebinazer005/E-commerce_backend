@@ -24,6 +24,15 @@ public class JwtFilter extends OncePerRequestFilter {
 	
 	@Autowired
 	private CustomUserDetailService customUserDetailService;
+	
+	  @Override
+	    protected boolean shouldNotFilter(HttpServletRequest request) {
+	        String path = request.getServletPath();
+	        return path.equals("/signin")
+	            || path.equals("/login")
+	            || path.equals("/verify-email")
+	            || path.equals("/home");
+	    }
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request,

@@ -30,12 +30,6 @@ public class EmailVerificationController {
         }
 
         UserEntity user = tokenEntity.getUser();
-        
-        if (user.isEmailVerified()) {
-            emailRepo.delete(tokenEntity);
-            return "Email already verified";
-        }
-        
         user.setEmailVerified(true);
         userRepo.save(user);
 

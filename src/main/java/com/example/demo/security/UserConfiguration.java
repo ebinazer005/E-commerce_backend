@@ -44,7 +44,7 @@ public class UserConfiguration {
         .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(auth -> auth
         		.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .requestMatchers("/home","/login","/signin").permitAll()
+                .requestMatchers("/home","/login","/signin","/verify-email").permitAll()
                 .requestMatchers("/demodata").authenticated()
                 .anyRequest().permitAll()
             )
