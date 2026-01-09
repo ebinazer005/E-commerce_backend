@@ -2,6 +2,7 @@ package com.example.demo;
 
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,19 +20,37 @@ public class UserEntity {
 		private String password;
 		private String role;
 		
-		public UserEntity(long id, String email, String password, String role) {
+		@Column(name = "email_verified", nullable = false)
+		private boolean emailVerified = false;
+
+		
+		
+//		public UserEntity(long id, String email, String password, String role) {
+//			super();
+//			this.id = id;
+//			this.email = email;
+//			this.password = password;
+//			this.role = role;
+//		}
+
+		
+		public UserEntity(Long id, String email, String password, String role, boolean emailVerified) {
 			super();
 			this.id = id;
 			this.email = email;
 			this.password = password;
 			this.role = role;
+			this.emailVerified = emailVerified;
 		}
-
+		
 		public UserEntity() {
 			super();
 			// TODO Auto-generated constructor stub
 		}
 	
+
+	
+
 
 		public Long getId() {
 			return id;
@@ -57,6 +76,14 @@ public class UserEntity {
 
 		public void setRole(String role) {
 			this.role = role;
+		}
+
+		public boolean isEmailVerified() {
+			return emailVerified;
+		}
+
+		public void setEmailVerified(boolean emailVerified) {
+			this.emailVerified = emailVerified;
 		}
 		
 		

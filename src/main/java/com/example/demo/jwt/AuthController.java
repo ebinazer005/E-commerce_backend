@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.LoginRequest;
+import com.example.demo.UserEntity;
+import com.example.demo.UserRepo;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,12 +28,27 @@ public class AuthController {
 
     @Autowired
     private JwtUtill jwtUtill;
+    
+    @Autowired
+    private UserRepo userRepo;
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(
             @RequestBody LoginRequest request,
             HttpServletResponse response) {
 
+    	//email verification
+    	UserEntity user = userRepo.findByEmail(request.getEmail()); 
+    	
+    	if (user == null) {
+    		return ResponseEntity.badRequest().body(Map.of("message", "User not found"));
+    	}
+    	
+    	 if (!user.isEmailVerified()) {
+    	        return ResponseEntity.badRequest().body(Map.of("message", "Please verify your email first"));
+    	  }
+    	 
+    	 
         Authentication authentication =
                 authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(
