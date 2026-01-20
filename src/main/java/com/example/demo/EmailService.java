@@ -15,6 +15,9 @@ public class EmailService {
 	@Value("${app.base-url}")
 	private String baseurl;
 	
+	@Value("${spring.mail.username}")
+	private String fromMail;
+	
 	public void sendverificationtoken(String mail , String token) {
 		
 		String link = baseurl + "/verify-email?token=" + token; 
@@ -22,10 +25,17 @@ public class EmailService {
 		SimpleMailMessage message = new SimpleMailMessage();
 		
 		message.setTo(mail);
+		message.setFrom(fromMail);
 		message.setSubject("verification mail from ebi store");
 		message.setText("Click the verification link "+link);
 		
-		javaMailSender.send(message);
+		try {
+			javaMailSender.send(message);
+			System.out.println("Mail successfully send " + mail);
+		} catch (Exception e) {
+			System.out.println("fail to send mail " + e.getMessage());
+		}
+		
 		
 	}
 

@@ -15,18 +15,27 @@ public class EmailVerificationController {
 
     @Autowired
     private UserRepo userRepo;
+    
+  
 
     @GetMapping("/verify-email")
     public String verifyEmail(@RequestParam String token) {
 
         EmailVerificationTokenEntity tokenEntity = emailRepo.findByToken(token);
+        
+        
 
         if (tokenEntity == null) {
             return "Invalid verification link";
         }
 
+        
         if (tokenEntity.getExpiryDate().isBefore(LocalDateTime.now())) {
+        	
+        	
+        	
             return "Verification link expired";
+            
         }
 
         UserEntity user = tokenEntity.getUser();
