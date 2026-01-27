@@ -15,8 +15,8 @@ public class EmailService {
 	@Value("${app.base-url}")
 	private String baseurl;
 	
-	@Value("${spring.mail.username}")
-	private String fromMail;
+	
+	private String fromMail ="ebinazer206@gmail.com";
 	
 	public void sendverificationtoken(String mail , String token) {
 		
