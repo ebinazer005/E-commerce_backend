@@ -35,8 +35,7 @@ public class EmailService {
 		} catch (Exception e) {
 			System.out.println("fail to send mail " + e.getMessage());
 		}
-		
-		
+			
 	}
 
 }
