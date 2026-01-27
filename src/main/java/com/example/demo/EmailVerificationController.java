@@ -22,8 +22,6 @@ public class EmailVerificationController {
     public String verifyEmail(@RequestParam String token) {
 
         EmailVerificationTokenEntity tokenEntity = emailRepo.findByToken(token);
-        
-        
 
         if (tokenEntity == null) {
             return "Invalid verification link";
