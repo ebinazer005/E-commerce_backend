@@ -1,6 +1,8 @@
-package com.example.demo;
+package com.example.demo.email;
 
 import java.time.LocalDateTime;
+
+import com.example.demo.UserEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

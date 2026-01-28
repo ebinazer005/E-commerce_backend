@@ -1,8 +1,10 @@
-package com.example.demo;
+package com.example.demo.email;
 
 import java.time.LocalDateTime;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
+
 
 public interface EmailRepo extends JpaRepository<EmailVerificationTokenEntity , Long> {
 

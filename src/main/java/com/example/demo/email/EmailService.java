@@ -1,7 +1,7 @@
-package com.example.demo;
+package com.example.demo.email;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -12,11 +12,13 @@ public class EmailService {
 	@Autowired
 	private JavaMailSender javaMailSender;
 	
-	@Value("${app.base-url}")
-	private String baseurl;
+//	@Value("${app.base-url}")
+	private String baseurl = "APP_BASE_URL:https://e-commerce-backend-01vu.onrender.com";
 	
+//	@Value("${app.mail.from}")
+//	private String fromMail;
 	
-	private String fromMail ="ebinazer206@gmail.com";
+	private String fromMail = "ebinazer206@gmail.com";
 	
 	public void sendverificationtoken(String mail , String token) {
 		

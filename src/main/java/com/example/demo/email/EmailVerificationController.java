@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.email;
 
 import java.time.LocalDateTime;
 
@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+
+import com.example.demo.UserEntity;
+import com.example.demo.UserRepo;
 
 @RestController
 public class EmailVerificationController {
