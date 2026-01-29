@@ -13,7 +13,7 @@ public class EmailService {
 	private JavaMailSender javaMailSender;
 	
 //	@Value("${app.base-url}")
-	private String baseurl = "APP_BASE_URL:https://e-commerce-backend-01vu.onrender.com";
+	private String baseurl = "https://e-commerce-backend-01vu.onrender.com";
 	
 //	@Value("${app.mail.from}")
 //	private String fromMail;
