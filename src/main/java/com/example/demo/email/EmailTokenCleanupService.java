@@ -32,12 +32,6 @@ public class EmailTokenCleanupService {
 		 for (EmailVerificationTokenEntity token : expiryTokens) {
 				
 			 emailRepo.delete(token);
-			 
-			 UserEntity user = token.getUser();
-			 
-			 if(!user.isEmailVerified()) {
-				 userRepo.delete(user);
-			 }
 		}
 	}
 	
