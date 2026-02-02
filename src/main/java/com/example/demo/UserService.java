@@ -70,5 +70,9 @@ public class UserService {
 	        
 	    }
 		
+		public void deleteData(long id) {
+			repo.deleteById(id);
+		}
+		
 		
 }
