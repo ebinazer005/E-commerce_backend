@@ -21,7 +21,7 @@ public class UserEntity {
 		private String role;
 		
 //		@Column(name = "email_verified", nullable = false)
-		private boolean emailVerified = true;
+		private boolean emailVerified = false;
 
 		
 		

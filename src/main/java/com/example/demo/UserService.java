@@ -66,8 +66,6 @@ public class UserService {
 //	        emailService.sendverificationtoken(user.getEmail(), token);
 //	        
 	        return user;
-	        
-	        
 	    }
 		
 		public void deleteData(long id) {
