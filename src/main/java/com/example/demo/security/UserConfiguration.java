@@ -45,7 +45,7 @@ public class UserConfiguration {
         .authorizeHttpRequests(auth -> auth
         		.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers("/home","/login","/signin","/verify-email").permitAll()
-                .requestMatchers("/demodata").authenticated()
+                .requestMatchers("/demodata,/cart/**").authenticated()
                 .anyRequest().permitAll()
             )
 //            .formLogin(form -> form

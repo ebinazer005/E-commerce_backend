@@ -20,7 +20,7 @@ public class UserEntity {
 		private String password;
 		private String role;
 		
-		@Column(name = "email_verified", nullable = false)
+//		@Column(name = "email_verified", nullable = false)
 		private boolean emailVerified = false;
 
 		

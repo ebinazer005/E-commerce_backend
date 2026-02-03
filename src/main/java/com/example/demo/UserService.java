@@ -9,6 +9,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.email.EmailRepo;
+import com.example.demo.email.EmailService;
+import com.example.demo.email.EmailVerificationTokenEntity;
+
 
 
 @Service
@@ -36,9 +40,9 @@ public class UserService {
 		
 		public UserEntity adddata(LoginRequest request ) {
 			
-			if (repo.existsByEmail(request.getEmail())) {
-	            throw new RuntimeException("Email already registered");
-	        }
+//			if (repo.existsByEmail(request.getEmail())) {
+//	            throw new RuntimeException("Email already registered");
+//	        }
 
 	        UserEntity user = new UserEntity();
 	        	
@@ -47,24 +51,26 @@ public class UserService {
 	        user.setEmail(request.getEmail());
 	        user.setPassword(passwordEncoder.encode(request.getPassword()));
 	        user.setRole("USER");
-	        user.setEmailVerified(false);
+	        user.setEmailVerified(true);
 //	        return repo.save(user);
 	        user = repo.save(user);
 	        
-	        String token = UUID.randomUUID().toString();
-	        
-	        EmailVerificationTokenEntity verification = new EmailVerificationTokenEntity();
-	        verification.setToken(token);
-	        verification.setUser(user);
-	        verification.setExpiryDate(LocalDateTime.now().plusMinutes(15));
-	        
-	        emailRepo.save(verification);
-	        emailService.sendverificationtoken(user.getEmail(), token);
-	        
+//	        String token = UUID.randomUUID().toString();
+//	        
+//	        EmailVerificationTokenEntity verification = new EmailVerificationTokenEntity();
+//	        verification.setToken(token);
+//	        verification.setUser(user);
+//	        verification.setExpiryDate(LocalDateTime.now().plusMinutes(15));
+//	        
+//	        emailRepo.save(verification);
+//	        emailService.sendverificationtoken(user.getEmail(), token);
+//	        
 	        return user;
-	        
-	        
 	    }
+		
+		public void deleteData(long id) {
+			repo.deleteById(id);
+		}
 		
 		
 }
